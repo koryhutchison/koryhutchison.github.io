@@ -27,6 +27,8 @@ const Omdb = (function () {
     let getByImdbId;
     let getByTitle;
     let getJSON;
+    let getPages;
+    let getTotalSearch;
     let makeRequest;
     let setApiKey;
 
@@ -65,17 +67,17 @@ const Omdb = (function () {
 
         // If provided, add the year
         if (parameters.year != undefined) {
-            url += "&y=" + parameters.year
+            url += "&y=" + parameters.year;
         }
 
         // If provided, add the return datatype
         if (parameters.returnType != undefined) {
-            url += "&r=" + parameters.returnType
+            url += "&r=" + parameters.returnType;
         }
 
         // If provided, add the version number, the default right now with the API is 1
         if (parameters.version != undefined) {
-            url += "&v=" + parameters.version
+            url += "&v=" + parameters.version;
         }
 
         return url += "&apikey=" + apiKey;
@@ -85,11 +87,11 @@ const Omdb = (function () {
         let returnJSON = true;
 
         if (options.searchText === false) {
-            return Error("Didn't specify searchText name in parameters object.")
+            return Error("Didn't specify searchText name in parameters object.");
         }
         options.searchText = options.searchText.toLowerCase();
 
-        options.searchText = options.searchText.replace(" ", "+")
+        options.searchText = options.searchText.replace(" ", "+");
 
         let url = buildUrl("search", options);
 
@@ -104,7 +106,7 @@ const Omdb = (function () {
         let returnJSON = true;
 
         if (options.imdbid === undefined) {
-            return Error("Didn't specify imdbid name in parameters object.")
+            return Error("Didn't specify imdbid name in parameters object.");
         }
 
         let url = buildUrl("id", options);
@@ -120,7 +122,7 @@ const Omdb = (function () {
         let returnJSON = true;
 
         if (options.title === undefined) {
-            return Error("Didn't specify title name in parameters object.")
+            return Error("Didn't specify title name in parameters object.");
         }
 
         let url = buildUrl("title", options);
@@ -133,7 +135,22 @@ const Omdb = (function () {
     };
 
     getJSON = function (promise) {
-        return promise.then(JSON.parse)
+        return promise.then(JSON.parse);
+    };
+
+    getPages = function (options) {
+        return findBySearch(options).then(function (response) {
+                return response.totalResults % 10;
+            });
+    };
+
+    getTotalSearch = function (numPages, options) {
+        let promiseArray = [];
+        for (let i = 1; i <= numPages; i++) {
+            options.page = i.toString();
+            promiseArray.push(findBySearch(options));
+        }
+        return promiseArray;
     };
 
     makeRequest = function (url, returnJSON) {
@@ -162,6 +179,7 @@ const Omdb = (function () {
                 req.send();
                 });
 
+        // If they want JSON, convert it, otherwise just return the xml
         if (returnJSON === true) {
             return getJSON(promiseObject);
         } else {
@@ -183,6 +201,8 @@ const Omdb = (function () {
         findBySearch: findBySearch,
         getByImdbId: getByImdbId,
         getbyTitle: getByTitle,
+        getPages: getPages,
+        getTotalSearch: getTotalSearch,
         setApiKey: setApiKey
     };
 }());
