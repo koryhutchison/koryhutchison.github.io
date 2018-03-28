@@ -82,23 +82,26 @@ const Omdb = (function () {
     };
 
     findBySearch = function (options) {
-        let returnJSON = false;
+        let returnJSON = true;
 
         if (options.searchText === false) {
             return console.log("Error: Didn't specify searchText name in parameters object.")
         }
+        options.searchText = options.searchText.toLowerCase();
+
+        options.searchText = options.searchText.replace(" ", "+")
 
         let url = buildUrl("search", options);
 
-        if (options.returnType === "json") {
-            returnJSON = true;
+        if (options.returnType === "xml") {
+            returnJSON = false;
         }
 
         return makeRequest(url, returnJSON);
     };
 
     getById = function (options) {
-        let returnJSON = false;
+        let returnJSON = true;
 
         if (options.imdbid === undefined) {
             return console.log("Error: Didn't specify imdbid name in parameters object.")
@@ -106,15 +109,15 @@ const Omdb = (function () {
 
         let url = buildUrl("id", options);
 
-        if (options.returnType === "json") {
-            returnJSON = true;
+        if (options.returnType === "xml") {
+            returnJSON = false;
         }
 
         return makeRequest(url, returnJSON);
     };
 
     getByTitle = function (options) {
-        let returnJSON = false;
+        let returnJSON = true;
 
         if (options.title === undefined) {
             return console.log("Error: Didn't specify title name in parameters object.")
@@ -122,8 +125,8 @@ const Omdb = (function () {
 
         let url = buildUrl("title", options);
 
-        if (options.returnType === "json") {
-            returnJSON = true;
+        if (options.returnType === "xml") {
+            returnJSON = false;
         }
 
         return makeRequest(url, returnJSON);
@@ -171,7 +174,7 @@ const Omdb = (function () {
     */
     return {
         findBySearch: findBySearch,
-        getById: getByID,
+        getById: getById,
         getbyTitle: getByTitle
     };
 }());
