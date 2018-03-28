@@ -1,5 +1,5 @@
 /*==============================================================================
-* File:   main.js
+* File:   omdb.js
 * Author: Kory Hutchison
 * Date:   Winter 2018
 *
@@ -13,22 +13,22 @@ const Omdb = (function () {
     /*----------------------------------------------------------------------------
     *                             Constants
     */
-    const apiKey = "7d8323b9"
 
     /*----------------------------------------------------------------------------
     *                             Private Variables
     */
-
+    let apiKey;
 
     /*------------------------------------------------------------------------
      *                      PRIVATE METHOD DECLARATIONS
      */
     let buildUrl;
     let findBySearch;
-    let getById;
+    let getByImdbId;
     let getByTitle;
     let getJSON;
     let makeRequest;
+    let setApiKey;
 
     /*----------------------------------------------------------------------------
     *                             Private Methods
@@ -85,7 +85,7 @@ const Omdb = (function () {
         let returnJSON = true;
 
         if (options.searchText === false) {
-            return console.log("Error: Didn't specify searchText name in parameters object.")
+            return Error("Didn't specify searchText name in parameters object.")
         }
         options.searchText = options.searchText.toLowerCase();
 
@@ -100,11 +100,11 @@ const Omdb = (function () {
         return makeRequest(url, returnJSON);
     };
 
-    getById = function (options) {
+    getByImdbId = function (options) {
         let returnJSON = true;
 
         if (options.imdbid === undefined) {
-            return console.log("Error: Didn't specify imdbid name in parameters object.")
+            return Error("Didn't specify imdbid name in parameters object.")
         }
 
         let url = buildUrl("id", options);
@@ -120,7 +120,7 @@ const Omdb = (function () {
         let returnJSON = true;
 
         if (options.title === undefined) {
-            return console.log("Error: Didn't specify title name in parameters object.")
+            return Error("Didn't specify title name in parameters object.")
         }
 
         let url = buildUrl("title", options);
@@ -169,12 +169,20 @@ const Omdb = (function () {
         }
     };
 
+    setApiKey = function (key) {
+        if (apiKey != undefined) {
+            return Error("API Key has already been set.");
+        }
+        apiKey = key;
+    };
+
     /*----------------------------------------------------------------------------
     *                             Public API
     */
     return {
         findBySearch: findBySearch,
-        getById: getById,
-        getbyTitle: getByTitle
+        getByImdbId: getByImdbId,
+        getbyTitle: getByTitle,
+        setApiKey: setApiKey
     };
 }());
