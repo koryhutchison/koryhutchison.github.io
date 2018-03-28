@@ -23,78 +23,155 @@ const Omdb = (function () {
     /*------------------------------------------------------------------------
      *                      PRIVATE METHOD DECLARATIONS
      */
-    let byIdOrTitle;
-    let bySearch;
+    let buildUrl;
+    let findBySearch;
+    let getById;
+    let getByTitle;
     let getJSON;
     let makeRequest;
 
     /*----------------------------------------------------------------------------
     *                             Private Methods
     */
-    byIdOrTitle = function (options) {
+    buildUrl = function (apiType, parameters) {
+        // NEEDSWORK: Need to add way to add season and episode parameters
 
-        // Set the base url
-        let url = "http://www.omdbapi.com/?"
+        let url = "http://www.omdbapi.com/?";
 
-        if (options.title != undefined && options.id != undefined) {
-            return console.log("Title and ID can't be defined at the same time. Choose one or the other for consistant results.");
+        if (apiType === "title") {
+            url += "t=" + parameters.title;
+
+            if (parameters.plot != undefined) {
+                url += "&plot=" + parameters.plot;
+            }
+        } else if (apiType === "id") {
+            url += "i=" + parameters.imdbid;
+
+            if (parameters.plot != undefined) {
+                url += "&plot=" + parameters.plot;
+            }
+        } else if (apiType === "search") {
+            url += "s=" + parameters.searchText;
+
+            if (parameters.page != undefined) {
+                url += "&page=" + parameters.page;
+            }
         }
 
-        if (options.title != undefined) {
-            let lowerCaseTitle = options.title.toLowerCase();
-            let parsedTitle = lowerCaseTitle.replace(" ", "+")
-            url += "t=" + parsedTitle
+        // If provided, add the type (movie, series, episode)
+        if (parameters.type != undefined) {
+            url += "&type=" + parameters.type;
         }
 
-        if (options.id != undefined) {
-            url += "i=" + options.id;
+        // If provided, add the year
+        if (parameters.year != undefined) {
+            url += "&y=" + parameters.year
         }
 
-        url += "&apikey=" + apiKey;
+        // If provided, add the return datatype
+        if (parameters.returnType != undefined) {
+            url += "&r=" + parameters.returnType
+        }
 
-        return makeRequest(url);
+        // If provided, add the version number, the default right now with the API is 1
+        if (parameters.version != undefined) {
+            url += "&v=" + parameters.version
+        }
+
+        return url += "&apikey=" + apiKey;
     };
 
-    bySearch = function () {
+    findBySearch = function (options) {
+        let returnJSON = false;
 
+        if (options.searchText === false) {
+            return console.log("Error: Didn't specify searchText name in parameters object.")
+        }
+
+        let url = buildUrl("search", options);
+
+        if (options.returnType === "json") {
+            returnJSON = true;
+        }
+
+        return makeRequest(url, returnJSON);
+    };
+
+    getById = function (options) {
+        let returnJSON = false;
+
+        if (options.imdbid === undefined) {
+            return console.log("Error: Didn't specify imdbid name in parameters object.")
+        }
+
+        let url = buildUrl("id", options);
+
+        if (options.returnType === "json") {
+            returnJSON = true;
+        }
+
+        return makeRequest(url, returnJSON);
+    };
+
+    getByTitle = function (options) {
+        let returnJSON = false;
+
+        if (options.title === undefined) {
+            return console.log("Error: Didn't specify title name in parameters object.")
+        }
+
+        let url = buildUrl("title", options);
+
+        if (options.returnType === "json") {
+            returnJSON = true;
+        }
+
+        return makeRequest(url, returnJSON);
     };
 
     getJSON = function (promise) {
         return promise.then(JSON.parse)
     };
 
-    makeRequest = function (url) {
-        return getJSON(new Promise(function(resolve, reject) {
-        let req = new XMLHttpRequest();
-        req.open('GET', url);
+    makeRequest = function (url, returnJSON) {
+        let promiseObject = new Promise(function(resolve, reject) {
+                let req = new XMLHttpRequest();
+                req.open('GET', url);
 
-        req.onload = function() {
-          // Check status to see if it's a success
-          if (req.status == 200) {
-            // Resolve the promise with the response text
-            resolve(req.response);
-          }
-          else {
-            // Reject and return the error
-            reject(Error(req.statusText));
-          }
-        };
+                req.onload = function() {
+                  // Check status to see if it's a success
+                  if (req.status == 200) {
+                    // Resolve the promise with the response text
+                    resolve(req.response);
+                  }
+                  else {
+                    // Reject and return the error
+                    reject(Error(req.statusText));
+                  }
+                };
 
-        // Handle network errors
-        req.onerror = function() {
-          reject(Error("Network Error"));
-        };
+                // Handle network errors
+                req.onerror = function() {
+                  reject(Error("Network Error"));
+                };
 
-        // Make the request
-        req.send();
-        }));
+                // Make the request
+                req.send();
+                });
+
+        if (returnJSON === true) {
+            return getJSON(promiseObject);
+        } else {
+            return promiseObject;
+        }
     };
 
     /*----------------------------------------------------------------------------
     *                             Public API
     */
     return {
-        byIdOrTitle: byIdOrTitle,
-        bySearch: bySearch
+        findBySearch: findBySearch,
+        getById: getByID,
+        getbyTitle: getByTitle
     };
 }());
