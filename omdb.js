@@ -28,7 +28,7 @@ const Omdb = (function () {
     let getByTitle;
     let getJSON;
     let getPages;
-    let getTotalSearch;
+    let searchByPageCount;
     let makeRequest;
     let setApiKey;
 
@@ -144,15 +144,6 @@ const Omdb = (function () {
             });
     };
 
-    getTotalSearch = function (numPages, options) {
-        let promiseArray = [];
-        for (let i = 1; i <= numPages; i++) {
-            options.page = i.toString();
-            promiseArray.push(findBySearch(options));
-        }
-        return promiseArray;
-    };
-
     makeRequest = function (url, returnJSON) {
         let promiseObject = new Promise(function(resolve, reject) {
                 let req = new XMLHttpRequest();
@@ -187,6 +178,18 @@ const Omdb = (function () {
         }
     };
 
+    // This returns an Array of promises with 10 results per page. I wouldn't suggest
+    // doing more than 5 pages at a time. The API won't be able to handle it,
+    // and 50 results is pretty sufficient.
+    searchByPageCount = function (numPages, options) {
+        let promiseArray = [];
+        for (let i = 1; i <= numPages; i++) {
+            options.page = i.toString();
+            promiseArray.push(findBySearch(options));
+        }
+        return promiseArray;
+    };
+
     setApiKey = function (key) {
         if (apiKey != undefined) {
             return Error("API Key has already been set.");
@@ -202,7 +205,7 @@ const Omdb = (function () {
         getByImdbId: getByImdbId,
         getbyTitle: getByTitle,
         getPages: getPages,
-        getTotalSearch: getTotalSearch,
+        searchByPageCount: searchByPageCount,
         setApiKey: setApiKey
     };
 }());
