@@ -49,6 +49,14 @@ const Omdb = (function () {
         } else if (apiType === "id") {
             url += "i=" + parameters.imdbid;
 
+            if (parameters.season != undefined) {
+                url += "&Season=" + parameters.season;
+            }
+
+            if (parameters.episode != undefined) {
+                url += "&Episode=" + parameters.episode;
+            }
+
             if (parameters.plot != undefined) {
                 url += "&plot=" + parameters.plot;
             }
@@ -140,7 +148,7 @@ const Omdb = (function () {
 
     getPages = function (options) {
         return findBySearch(options).then(function (response) {
-                return response.totalResults % 10;
+                return Math.trunc(response.totalResults / 10);
             });
     };
 
