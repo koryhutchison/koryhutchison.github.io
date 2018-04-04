@@ -21,53 +21,105 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                <h3>Search by title:</h3>
-                <br />
-                <form>
-                  <div class="form-group row">
-                    <label for="titleinput" class="col-md-2 col-form-label"><span class="required">*</span>Title:</label>
-                    <div class="col-md-10">
-                        <input type="text" class="form-control" id="title-input" placeholder="Black Panther" required>
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="seasoninput" class="col-md-2 col-form-label">Season:</label>
-                    <div class="col-md-3">
-                        <input type="number" class="form-control" id="season-input" placeholder="1">
-                    </div>
-                    <label for="episodeinput" class="col-sm-2 col-form-label">Episode:</label>
-                    <div class="col-md-3">
-                        <input type="number" class="form-control" id="episode-input" placeholder="1">
-                    </div>
-                  </div>
-                  <div class="form-group row">
-                    <label for="plotinput" class="col-sm-3 col-form-label">Plot Length:</label>
-                    <div class="col-md-9">
-                        <select id="plot-select" class="form-control">
-                            <option value="short">Short</option>
-                            <option value="full">Full</option>
-                        </select>
-                    </div>
+                <div class="text-center">
+                    <h1>Try it out!</h1>
                 </div>
                 <br />
-                <h5>Narrow down even more:</h5>
-                <div class="form-group row">
-                  <label for="plotinput" class="col-sm-2 col-form-label">Type:</label>
-                  <div class="col-md-3">
-                      <select id="type-select" class="form-control">
-                          <option value="movie">Movie</option>
-                          <option value="series">Series</option>
-                          <option value="episode">Episode</option>
-                      </select>
-                  </div>
-                  <label for="yearinput" class="col-sm-2 col-form-label">Year:</label>
-                  <div class="col-md-3">
-                      <input type="number" class="form-control" id="year-input" placeholder="1">
-                  </div>
-                </div>
+                <ul class="nav nav-tabs nav-fill">
+                  <li class="nav-item">
+                    <a class="nav-link" id="by-title" href="">By Title</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="by-imdb" href="">By IMDb ID</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="by-search" href="">Search</a>
+                  </li>
+                </ul>
                 <br />
-                <button type="submit" class="btn btn-block btn-success">Submit</button>
-              </form>
+                <div id="search-by-title">
+                    <br />
+                    <form>
+                      <div class="form-group row">
+                        <label for="titleinput" class="col-md-2 col-form-label"><span class="required">*</span>Title:</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" id="title-input" placeholder="Black Panther" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="seasoninput" class="col-md-2 col-form-label">Season:</label>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control" id="season-input" placeholder="1">
+                        </div>
+                        <label for="episodeinput" class="col-sm-2 col-form-label">Episode:</label>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control" id="episode-input" placeholder="1">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="plotinput" class="col-sm-3 col-form-label">Plot Length:</label>
+                        <div class="col-md-9">
+                            <select id="plot-select" class="form-control">
+                                <option value="short">Short</option>
+                                <option value="full">Full</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <h5>Narrow down even more:</h5>
+                    <div class="form-group row">
+                      <label for="plotinput" class="col-sm-2 col-form-label">Type:</label>
+                      <div class="col-md-3">
+                          <select id="type-select" class="form-control">
+                              <option value="movie">Movie</option>
+                              <option value="series">Series</option>
+                              <option value="episode">Episode</option>
+                          </select>
+                      </div>
+                      <label for="yearinput" class="col-sm-2 col-form-label">Year:</label>
+                      <div class="col-md-3">
+                          <input type="number" class="form-control" id="year-input" placeholder="2018">
+                      </div>
+                    </div>
+                    <br />
+                    <button type="submit" id="submit-btn" class="btn btn-block btn-success">Submit</button>
+                  </form>
+                </div>
+                <div id="search-by-imdb">
+                    <br />
+                    <form>
+                      <div class="form-group row">
+                        <label for="titleinput" class="col-md-3 col-form-label"><span class="required">*</span>IMDb ID:</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="title-input" placeholder="tt1825683" required>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="seasoninput" class="col-md-2 col-form-label">Season:</label>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control" id="season-input" placeholder="1">
+                        </div>
+                        <label for="episodeinput" class="col-sm-2 col-form-label">Episode:</label>
+                        <div class="col-md-3">
+                            <input type="number" class="form-control" id="episode-input" placeholder="1">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="plotinput" class="col-sm-3 col-form-label">Plot Length:</label>
+                        <div class="col-md-9">
+                            <select id="plot-select" class="form-control">
+                                <option value="short">Short</option>
+                                <option value="full">Full</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <button type="submit" id="submit-btn" class="btn btn-block btn-success">Submit</button>
+                  </form>
+                </div>
+                <div id="search-by-search">
+                    <h2>Search</h2>
+                </div>
             </div>
             <div class="col-md-6">
                 <p>
@@ -78,5 +130,6 @@
     </div>
 </body>
     <script type="text/javascript" src="omdb.js"></script>
+    <script type="text/javascript" src="jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="main.js"></script>
 </html>

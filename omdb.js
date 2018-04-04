@@ -219,7 +219,7 @@ const Omdb = (function () {
     return {
         findBySearch: findBySearch,
         getByImdbId: getByImdbId,
-        getbyTitle: getByTitle,
+        getByTitle: getByTitle,
         getPages: getPages,
         searchByPageCount: searchByPageCount,
         setApiKey: setApiKey
