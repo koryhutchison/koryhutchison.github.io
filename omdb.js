@@ -43,6 +43,14 @@ const Omdb = (function () {
         if (apiType === "title") {
             url += "t=" + parameters.title;
 
+            if (parameters.season != undefined) {
+                url += "&Season=" + parameters.season;
+            }
+
+            if (parameters.episode != undefined) {
+                url += "&Episode=" + parameters.episode;
+            }
+
             if (parameters.plot != undefined) {
                 url += "&plot=" + parameters.plot;
             }
