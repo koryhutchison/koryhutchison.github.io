@@ -33,6 +33,15 @@ $(function () {
         }
         Omdb.getByTitle(options).then(function (response) {
             console.log(response);
+            $('#title').html(response.Title);
+            $('#year').html(response.Year);
+            $('#rating').html(response.Rated);
+            $('#imdb-rating').html(response.imdbRating);
+            $('#metascore').html(response.Metascore);
+            $('#runtime').html(response.Runtime);
+            $('#box-office').html(response.BoxOffice);
+            $('#awards').html(response.Awards);
+            $('#poster').attr('src', response.Poster);
         });
     });
 
