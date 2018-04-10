@@ -54,6 +54,12 @@ const Omdb = (function () {
             if (parameters.plot != undefined) {
                 url += "&plot=" + parameters.plot;
             }
+
+            // If provided, add the type (movie, series, episode)
+            if (parameters.type != undefined) {
+                url += "&type=" + parameters.type;
+            }
+
         } else if (apiType === "id") {
             url += "i=" + parameters.imdbid;
 
@@ -74,11 +80,11 @@ const Omdb = (function () {
             if (parameters.page != undefined) {
                 url += "&page=" + parameters.page;
             }
-        }
 
-        // If provided, add the type (movie, series, episode)
-        if (parameters.type != undefined) {
-            url += "&type=" + parameters.type;
+            // If provided, add the type (movie, series, episode)
+            if (parameters.type != undefined) {
+                url += "&type=" + parameters.type;
+            }
         }
 
         // If provided, add the year

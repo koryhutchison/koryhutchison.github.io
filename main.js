@@ -1,13 +1,57 @@
 Omdb.setApiKey("7d8323b9");
 
+function addToDom(response, search) {
+    console.log(response);
+    let text;
+    let poster;
+    if (response.Response == "True") {
+        poster = "<img src=\"" + response.Poster + "\" id=\"poster\" class=\"img-fluid\" />"
+        text = "<p>Title: " + response.Title +
+        "</p><p>Year: " + response.Year +
+        "</p><p>Rating: " + response.Rated +
+        "</p><p>IMDb Rating: " + response.imdbRating +
+        "</p><p>Metascore: " + response.Metascore +
+        "</p><p>Runtime: " + response.Runtime +
+        "</p><p>Box Office: " + response.BoxOffice +
+        "</p><p>Awards: " + response.Awards +
+        "</p><p>Plot: " + response.Plot +
+        "</p>";
+    } else if (search == "True") {
+        poster = "<img src=\"" + response.Poster + "\" id=\"poster\" class=\"img-fluid\" />"
+        text = "<p>Title: " + response.Title +
+        "</p><p>Year: " + response.Year +
+        "</p><p>IMDb ID: " + response.imdbID +
+        "</p><p>Type: " + response.Type +
+        "</p>";
+    } else {
+        poster = "";
+        text = "<p>Error: " + response.Error + "</p>";
+    }
+    $('#resultText').html(text);
+    $('#resultPoster').html(poster);
+}
+
 // Omdb.getByImdbId({imdbid: "tt1825683"}).then(function (response) {
 //     console.log(response);
 // });
 $(function () {
+    // Initialize the page to show the right tab and right active links
     $('#by-title').addClass('active');
+    $('#ex-initial').addClass('active');
+    $('#options-table').hide();
+    $('#desc-initial').show();
+    $('#desc-api').hide();
+    $('#desc-title').hide();
+    $('#desc-options').hide();
+    $('#desc-search').hide();
+    $('#desc-pages').hide();
+    $('#desc-pagecount').hide();
     $('#search-by-title').show();
     $('#search-by-imdb').hide();
     $('#search-by-search').hide();
+
+    // Put the example javascript code in for setting api key
+    $('#codeExample').text("<script type=\"text/javascript\" src=\"omdb.js\"></script>\n<script type=\"text/javascript\" src=\"main.js\"></script>").html();
 
     // Get info from title form and display on screen
     $('#submit-btn-title').click(function (event) {
@@ -32,16 +76,7 @@ $(function () {
             options.year = $('#year-input-title').val();
         }
         Omdb.getByTitle(options).then(function (response) {
-            console.log(response);
-            $('#title').html(response.Title);
-            $('#year').html(response.Year);
-            $('#rating').html(response.Rated);
-            $('#imdb-rating').html(response.imdbRating);
-            $('#metascore').html(response.Metascore);
-            $('#runtime').html(response.Runtime);
-            $('#box-office').html(response.BoxOffice);
-            $('#awards').html(response.Awards);
-            $('#poster').attr('src', response.Poster);
+            addToDom(response);
         });
     });
 
@@ -62,7 +97,7 @@ $(function () {
             options.plot = $('#plot-select-imdb').val();
         }
         Omdb.getByImdbId(options).then(function (response) {
-            console.log(response);
+            addToDom(response);
         });
     });
 
@@ -87,10 +122,12 @@ $(function () {
             options.year = $('#year-input-search').val();
         }
         Omdb.findBySearch(options).then(function (response) {
-            console.log(response['Search'][resultNumber - 1]);
+            let search = response.Response;
+            addToDom(response['Search'][resultNumber - 1], search);
         });
     });
 
+    // Control showing or hiding the different tabs in the try it out section
     $('#by-title').click(function (event) {
         event.preventDefault();
         $('#search-by-title').show();
@@ -120,4 +157,174 @@ $(function () {
         $('#by-imdb').removeClass('active');
         $('#by-title').removeClass('active');
     });
+
+    // Handle clicks in examples
+    $('#ex-initial').click(function (event) {
+        event.preventDefault();
+        // Add or remove active class
+        $('#ex-initial').addClass('active');
+        $('#ex-api').removeClass('active');
+        $('#ex-title').removeClass('active');
+        $('#ex-options').removeClass('active');
+        $('#ex-search').removeClass('active');
+        $('#ex-pages').removeClass('active');
+        $('#ex-pagecount').removeClass('active');
+
+        // Show correct description
+        $('#desc-initial').show();
+        $('#desc-api').hide();
+        $('#desc-title').hide();
+        $('#desc-options').hide();
+        $('#desc-search').hide();
+        $('#desc-pages').hide();
+        $('#desc-pagecount').hide();
+
+        // Write code to the screen
+        $('#options-table').hide();
+        $('#codeExample').text("<script type=\"text/javascript\" src=\"omdb.js\"></script>\n<script type=\"text/javascript\" src=\"main.js\"></script>").html();
+    });
+    $('#ex-api').click(function (event) {
+        event.preventDefault();
+        // Add or remove active class
+        $('#ex-initial').removeClass('active');
+        $('#ex-api').addClass('active');
+        $('#ex-title').removeClass('active');
+        $('#ex-options').removeClass('active');
+        $('#ex-search').removeClass('active');
+        $('#ex-pages').removeClass('active');
+        $('#ex-pagecount').removeClass('active');
+
+        // Show correct description
+        $('#desc-initial').hide();
+        $('#desc-api').show();
+        $('#desc-title').hide();
+        $('#desc-options').hide();
+        $('#desc-search').hide();
+        $('#desc-pages').hide();
+        $('#desc-pagecount').hide();
+
+        // Write code to the screen
+        $('#options-table').hide();
+        $('#codeExample').text("Omdb.setApiKey(\"<API KEY>\");").html();
+    });
+    $('#ex-title').click(function (event) {
+        event.preventDefault();
+        // Add or remove active class
+        $('#ex-initial').removeClass('active');
+        $('#ex-api').removeClass('active');
+        $('#ex-title').addClass('active');
+        $('#ex-options').removeClass('active');
+        $('#ex-search').removeClass('active');
+        $('#ex-pages').removeClass('active');
+        $('#ex-pagecount').removeClass('active');
+
+        // Show correct description
+        $('#desc-initial').hide();
+        $('#desc-api').hide();
+        $('#desc-title').show();
+        $('#desc-options').hide();
+        $('#desc-search').hide();
+        $('#desc-pages').hide();
+        $('#desc-pagecount').hide();
+
+        // Write code to the screen
+        $('#options-table').hide();
+        $('#codeExample').text("Omdb.getByTitle(options).then(function (response) {\n    console.log(response);\n}).catch(function(error) {\n    console.log(\"Failed!\", error);\n});").html();
+    });
+    $('#ex-options').click(function (event) {
+        event.preventDefault();
+        // Add or remove active class
+        $('#ex-initial').removeClass('active');
+        $('#ex-api').removeClass('active');
+        $('#ex-title').removeClass('active');
+        $('#ex-options').addClass('active');
+        $('#ex-search').removeClass('active');
+        $('#ex-pages').removeClass('active');
+        $('#ex-pagecount').removeClass('active');
+
+        // Show correct description
+        $('#desc-initial').hide();
+        $('#desc-api').hide();
+        $('#desc-title').hide();
+        $('#desc-options').show();
+        $('#desc-search').hide();
+        $('#desc-pages').hide();
+        $('#desc-pagecount').hide();
+
+        // Write code to the screen
+        $('#options-table').show();
+        $('#codeExample').text("let options = { title: \"Black Panther\", year: \"2018\" }").html();
+    });
+    $('#ex-search').click(function (event) {
+        event.preventDefault();
+        // Add or remove active class
+        $('#ex-initial').removeClass('active');
+        $('#ex-api').removeClass('active');
+        $('#ex-title').removeClass('active');
+        $('#ex-options').removeClass('active');
+        $('#ex-search').addClass('active');
+        $('#ex-pages').removeClass('active');
+        $('#ex-pagecount').removeClass('active');
+
+        // Show correct description
+        $('#desc-initial').hide();
+        $('#desc-api').hide();
+        $('#desc-title').hide();
+        $('#desc-options').hide();
+        $('#desc-search').show();
+        $('#desc-pages').hide();
+        $('#desc-pagecount').hide();
+
+        $('#options-table').hide();
+        $('#codeExample').text("Omdb.findBySearch(options).then(function (response) {\n    console.log(response);\n}).catch(function(error) {\n    console.log(\"Failed!\", error);\n});").html();
+    });
+    $('#ex-pages').click(function (event) {
+        event.preventDefault();
+        // Add or remove active class
+        $('#ex-initial').removeClass('active');
+        $('#ex-api').removeClass('active');
+        $('#ex-title').removeClass('active');
+        $('#ex-options').removeClass('active');
+        $('#ex-search').removeClass('active');
+        $('#ex-pages').addClass('active');
+        $('#ex-pagecount').removeClass('active');
+
+        // Show correct description
+        $('#desc-initial').hide();
+        $('#desc-api').hide();
+        $('#desc-title').hide();
+        $('#desc-options').hide();
+        $('#desc-search').hide();
+        $('#desc-pages').show();
+        $('#desc-pagecount').hide();
+
+        $('#options-table').hide();
+        $('#codeExample').text("let numPages = Omdb.getPages({ searchText: \"Batman\" });").html();
+    });
+    $('#ex-pagecount').click(function (event) {
+        event.preventDefault();
+        // Add or remove active class
+        $('#ex-initial').removeClass('active');
+        $('#ex-api').removeClass('active');
+        $('#ex-title').removeClass('active');
+        $('#ex-options').removeClass('active');
+        $('#ex-search').removeClass('active');
+        $('#ex-pages').removeClass('active');
+        $('#ex-pagecount').addClass('active');
+
+        // Show correct description
+        $('#desc-initial').hide();
+        $('#desc-api').hide();
+        $('#desc-title').hide();
+        $('#desc-options').hide();
+        $('#desc-search').hide();
+        $('#desc-pages').hide();
+        $('#desc-pagecount').show();
+
+        $('#options-table').hide();
+        $('#codeExample').text("let promiseArray = Omdb.searchByPageCount(numPages, options);").html();
+    });
+
+
+
 });

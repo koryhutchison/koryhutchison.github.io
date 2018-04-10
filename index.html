@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap CSS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="main.css" rel="stylesheet">
 </head>
@@ -28,13 +30,13 @@
                 <br />
                 <ul class="nav nav-tabs nav-fill">
                   <li class="nav-item">
-                    <a class="nav-link" id="by-title" href="">By Title</a>
+                    <a class="nav-link tabs" id="by-title" href="">By Title</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="by-imdb" href="">By IMDb ID</a>
+                    <a class="nav-link tabs" id="by-imdb" href="">By IMDb ID</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="by-search" href="">Search</a>
+                    <a class="nav-link tabs" id="by-search" href="">Search</a>
                   </li>
                 </ul>
                 <br />
@@ -156,35 +158,172 @@
         </div>
             <div class="col-md-6">
                 <div class="row">
-                    <div class="col-md-6">
-                        <p>
-                            Title: <span id="title"></span>
-                        </p>
-                        <p>
-                            Year: <span id="year"></span>
-                        </p>
-                        <p>
-                            Rating: <span id="rating"></span>
-                        </p>
-                        <p>
-                            IMDb Rating: <span id="imdb-rating"></span>
-                        </p>
-                        <p>
-                            Metascore: <span id="metascore"></span>
-                        </p>
-                        <p>
-                            Runtime: <span id="runtime"></span>
-                        </p>
-                        <p>
-                            Box Office: <span id="box-office"></span>
-                        </p>
-                        <p>
-                            Awards: <span id="awards"></span>
-                        </p>
+                    <div class="col-md-6" id="resultText">
+
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6" id="resultPoster">
                         <img src="" id="poster" class="img-fluid" />
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            <h1 class="display-4" id="doc">Documentation</h1>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 add-padding">
+                    <p>
+                        This section is intended to help anyone understand how to use the omdb.js
+                        library in their own code. Take a look and see the examples on how to use
+                        each function in your own code so you can start using the API in no time!
+                    </p>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="nav flex-column nav-pills">
+                    <a class="nav-link" id="ex-initial" href="">Initial Setup</a>
+                    <a class="nav-link" id="ex-api" href="">setApiKey()</a>
+                    <a class="nav-link" id="ex-options" href="">Options Object</a>
+                    <a class="nav-link" id="ex-title" href="">getByTitle()</a>
+                    <a class="nav-link" id="ex-search" href="">findBySearch()</a>
+                    <a class="nav-link" id="ex-pages" href="">getPages()</a>
+                    <a class="nav-link" id="ex-pagecount" href="">searchByPageCount()</a>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <pre class="code-block"><code class="language-javascript" data-lang="javascript" id="codeExample"></code></pre>
+                <table class="table table-bordered text-center" id="options-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Key</th>
+                      <th scope="col">getByTitle</th>
+                      <th scope="col">getByImdbId</th>
+                      <th scope="col">findBySearch</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">title</th>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">imdbId</th>
+                      <td></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">searchText</th>
+                      <td></td>
+                      <td></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">season</th>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">episode</th>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">plot</th>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">page</th>
+                      <td></td>
+                      <td></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">type</th>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">year</th>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">returnType</th>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                    </tr>
+                    <tr>
+                      <th scope="row">version</th>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                      <td><i class="far fa-check-square fa-lg"></i></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div id="desc-initial">
+                    <p>
+                        For the initial setup, you'll want to include the omdb.js file first thing on your HTML page.
+                        This ensures that all the functions and capabilities of the omdb.js file are available to any other
+                        JavaScript files you make after that. In this case, I used a main.js file to handle the rest of my JavaScript.
+                        Also, make sure you put these script tags at the bottom, right after the <code>body</code> tag.
+                    </p>
+                </div>
+                <div id="desc-api">
+                    <p>
+                        When you use the library, you'll want to set the API Key right at the beginning of your own JavaScript file
+                        by using the Omdb.setApiKey() function. This function can only be used once, so a user can't
+                        call this function later to change the key. Because this library is run in JavaScript on the client, it's important
+                        to know that your API key <span class="warning">WILL NOT</span> be secret. Make sure you only use a free key that you get from the <a href="http://www.omdbapi.com">OMDb Website</a>
+                        to make it meaningless for someone to use your key. Brian Fritz is hoping to make the api free to everyone eventually, so it won't be an issue then.
+                    </p>
+                </div>
+                <div id="desc-options">
+                    <p>
+                        The options object is how you send the data to the request. There are tons of options, and you can read
+                        about them at the <a href="http://www.omdbapi.com">OMDb website</a>. But the way you define them is shown
+                        above, along with all the different options that exist. Just to clarify, the keywords title, imdbid, and searchText will only
+                        work with getByTitle, getByImdbId, and findBySearch respectively.
+                    </p>
+                </div>
+                <div id="desc-title">
+                    <p>
+                        This is the function you will use if you want to get a specific movie based off of a title. It's
+                        not a function to use for searches. As you can see it uses a JavaScript Promise to handle the request. If
+                        you are not familiar with promises, check out this link <a href="https://developers.google.com/web/fundamentals/primers/promises">here</a>.
+                    </p>
+                </div>
+                <div id="desc-search">
+                    <p>
+                        Once again, this function is very similar to the getByTitle and getByImdbId functions, however this one returns a JSON object
+                        that has an array of results. Usually about 10.
+                    </p>
+                </div>
+                <div id="desc-pages">
+                    <p>
+                        The getPages function is a very useful function if you want to be able to query the API for a certain number
+                        of pages via the searchByPageCount function. It takes the same options object as a findBySearch function, but
+                        it only returns the number of pages for that specific search. Note: this does not return a Promise.
+                    </p>
+                </div>
+                <div id="desc-pagecount">
+                    <p>
+                        The searchByPageCount function is useful if you want to query the API to get more than 10 results at a time.
+                        The function returns an array of Promise objects that can then be used to display all the results. I wouldn't
+                        suggest you do more than 5 pages at a time because the API may not be able to handle that many requests.
+                    </p>
                 </div>
             </div>
         </div>

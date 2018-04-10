@@ -2,14 +2,35 @@
     color: red;
 }
 
-.nav-link {
+.tabs {
     color: black;
 }
 
-.nav-link:hover {
+.tabs:hover {
     color: black;
 }
 
 #wrapper {
     height: 500px;
+}
+
+.code-block {
+    padding: 50px;
+    background-color: rgb(240, 240, 240);
+    border-radius: 10px;
+}
+
+.warning {
+    color: red;
+}
+
+.add-padding {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+@media only screen and (max-width: 768px) {
+    #wrapper {
+        height: 800px;
+    }
 }
