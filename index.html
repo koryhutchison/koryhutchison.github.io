@@ -181,7 +181,7 @@
                 <div class="col-md-3"></div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" id="example-row">
             <div class="col-md-3">
                 <div class="nav flex-column nav-pills">
                     <a class="nav-link" id="ex-initial" href="">Initial Setup</a>
@@ -194,85 +194,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <pre class="code-block"><code class="language-javascript" data-lang="javascript" id="codeExample"></code></pre>
-                <table class="table table-bordered text-center" id="options-table">
-                  <thead>
-                    <tr>
-                      <th scope="col">Key</th>
-                      <th scope="col">getByTitle</th>
-                      <th scope="col">getByImdbId</th>
-                      <th scope="col">findBySearch</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <th scope="row">title</th>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">imdbId</th>
-                      <td></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">searchText</th>
-                      <td></td>
-                      <td></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">season</th>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">episode</th>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">plot</th>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">page</th>
-                      <td></td>
-                      <td></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">type</th>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">year</th>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">returnType</th>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                    </tr>
-                    <tr>
-                      <th scope="row">version</th>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                      <td><i class="far fa-check-square fa-lg"></i></td>
-                    </tr>
-                  </tbody>
-                </table>
+                <pre class="code-block"><code id="codeExample"></code></pre>
                 <div id="desc-initial">
                     <p>
                         For the initial setup, you'll want to include the omdb.js file first thing on your HTML page.
@@ -294,7 +216,8 @@
                     <p>
                         The options object is how you send the data to the request. There are tons of options, and you can read
                         about them at the <a href="http://www.omdbapi.com">OMDb website</a>. But the way you define them is shown
-                        above, along with all the different options that exist. Just to clarify, the keywords title, imdbid, and searchText will only
+                        above. Down below in the next section, you can find all the differnt options and which ones work with each function.
+                         Just to clarify, the keywords title, imdbid, and searchText will only
                         work with getByTitle, getByImdbId, and findBySearch respectively.
                     </p>
                 </div>
@@ -327,7 +250,107 @@
                 </div>
             </div>
         </div>
+        <div class="text-center">
+            <h1 class="display-4">Options</h1>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6 add-padding">
+                    <p>
+                        Down below is a table that helps clarify which parameters
+                        you can pass into the different functions. The functions getPages and
+                        searchByPageCount take the same parameters as findBySearch.
+                    </p>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered text-center" id="options-table">
+              <thead>
+                <tr>
+                  <th scope="col">Key</th>
+                  <th scope="col">getByTitle</th>
+                  <th scope="col">getByImdbId</th>
+                  <th scope="col">findBySearch</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">title</th>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">imdbId</th>
+                  <td></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">searchText</th>
+                  <td></td>
+                  <td></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">season</th>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">episode</th>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">plot</th>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <th scope="row">page</th>
+                  <td></td>
+                  <td></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">type</th>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">year</th>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">returnType</th>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                </tr>
+                <tr>
+                  <th scope="row">version</th>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                  <td><i class="far fa-check-square fa-lg"></i></td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
     </div>
+    <footer class="footer">
+        <div class="container" id="footer-container">
+            <span>&copy;<span id="footer-year"></span> <a href="http://koryhutchison.com">Kory Hutchison</a></span>
+            <span id="connectors"><a href=""><i class="fab fa-linkedin fa-2x"></i></a><i class="fab fa-twitter-square fa-2x"></i><i class="fab fa-github-square fa-2x"></i></span>
+        </div>
+    </footer>
 </body>
     <script type="text/javascript" src="omdb.js"></script>
     <script type="text/javascript" src="jquery-3.3.1.min.js"></script>

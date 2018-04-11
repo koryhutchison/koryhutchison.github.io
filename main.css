@@ -11,7 +11,7 @@
 }
 
 #wrapper {
-    height: 500px;
+    height: 550px;
 }
 
 .code-block {
@@ -29,8 +29,46 @@
     padding-bottom: 30px;
 }
 
+#example-row {
+    height: 350px;
+}
+
+#resultText {
+    height: 550px;
+    overflow-y: scroll;
+}
+
+#poster {
+    display: block;
+    margin: auto;
+}
+
+.footer {
+    padding: 50px;
+    background-color: #e9ecef;
+    margin-top: 20px;
+}
+
+#footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
 @media only screen and (max-width: 768px) {
     #wrapper {
         height: 800px;
+    }
+
+    #example-row {
+        height: 700px;
+    }
+
+}
+
+@media only screen and (max-width: 576px) {
+    #doc {
+        font-size: 30pt;
     }
 }
