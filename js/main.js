@@ -1,7 +1,6 @@
 Omdb.setApiKey("7d8323b9");
 
 function addToDom(response, search) {
-    console.log(response);
     let text;
     let poster;
     if (response.Response == "True") {
@@ -50,7 +49,7 @@ $(function () {
     let date = new Date();
     let year = date.getFullYear();
     $('#footer-year').html(year);
-    
+
     // Put in a example result from the beginning
     // Omdb.getByTitle({ title: "Black Panther" }).then(function (response) {
     //     addToDom(response);
@@ -83,6 +82,9 @@ $(function () {
         }
         Omdb.getByTitle(options).then(function (response) {
             addToDom(response);
+        }).catch(function (error) {
+            $('#resultText').html(error);
+            $('#resultPoster').html("");
         });
     });
 
@@ -104,6 +106,9 @@ $(function () {
         }
         Omdb.getByImdbId(options).then(function (response) {
             addToDom(response);
+        }).catch(function (error) {
+            $('#resultText').html(error);
+            $('#resultPoster').html("");
         });
     });
 
@@ -130,6 +135,9 @@ $(function () {
         Omdb.findBySearch(options).then(function (response) {
             let search = response.Response;
             addToDom(response['Search'][resultNumber - 1], search);
+        }).catch(function (error) {
+            $('#resultText').html(error);
+            $('#resultPoster').html("");
         });
     });
 
