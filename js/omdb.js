@@ -11,10 +11,6 @@
 const Omdb = (function () {
     "use strict";
     /*----------------------------------------------------------------------------
-    *                             Constants
-    */
-
-    /*----------------------------------------------------------------------------
     *                             Private Variables
     */
     let apiKey;
@@ -36,9 +32,7 @@ const Omdb = (function () {
     *                             Private Methods
     */
     buildUrl = function (apiType, parameters) {
-        // NEEDSWORK: Need to add way to add season and episode parameters
-
-        let url = "http://www.omdbapi.com/?";
+        let url = "https://www.omdbapi.com/?";
 
         if (apiType === "title") {
             url += "t=" + parameters.title;
