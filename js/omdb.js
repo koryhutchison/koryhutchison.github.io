@@ -103,7 +103,7 @@ const Omdb = (function () {
         let returnJSON = true;
 
         if (options.searchText === false) {
-            return Error("Didn't specify searchText name in parameters object.");
+            return Error("Didn't specify searchText name in options object.");
         }
         options.searchText = options.searchText.toLowerCase();
 
@@ -122,7 +122,7 @@ const Omdb = (function () {
         let returnJSON = true;
 
         if (options.imdbid === undefined) {
-            return Error("Didn't specify imdbid name in parameters object.");
+            return Error("Didn't specify imdbid name in options object.");
         }
 
         let url = buildUrl("id", options);
@@ -138,7 +138,7 @@ const Omdb = (function () {
         let returnJSON = true;
 
         if (options.title === undefined) {
-            return Error("Didn't specify title name in parameters object.");
+            return Error("Didn't specify title name in options object.");
         }
 
         let url = buildUrl("title", options);
@@ -150,10 +150,12 @@ const Omdb = (function () {
         return makeRequest(url, returnJSON);
     };
 
+    // Returns a promise in JSON form
     getJSON = function (promise) {
         return promise.then(JSON.parse);
     };
 
+    // Returns the number of pages from a search result to be used in searchByPageCount
     getPages = function (options) {
         return findBySearch(options).then(function (response) {
                 return Math.trunc(response.totalResults / 10);
@@ -206,6 +208,7 @@ const Omdb = (function () {
         return promiseArray;
     };
 
+    // Sets the API key. Can only be set once.
     setApiKey = function (key) {
         if (apiKey != undefined) {
             return Error("API Key has already been set.");
