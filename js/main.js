@@ -331,7 +331,4 @@ $(function () {
 
         $('#codeExample').text("let promiseArray = Omdb.searchByPageCount(numPages, options);").html();
     });
-
-
-
 });

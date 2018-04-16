@@ -1,3 +1,4 @@
+/* ----- General Styling ------ */
 body {
     background-color: #1A1A1D;
     color: white;
@@ -15,82 +16,8 @@ body a:hover {
     color: red;
 }
 
-.tabs {
-    color: black;
-}
-
-.tabs:hover {
-    color: black;
-}
-
-#wrapper {
-    height: 550px;
-}
-
-.code-block {
-    padding: 50px;
-    background-color: #4E4E50;
-    border-radius: 10px;
-    color: white;
-}
-
-.warning {
-    color: red;
-}
-
-.add-padding {
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-#example-row {
-    height: 350px;
-}
-
-#resultText {
-    height: 550px;
-    overflow-y: scroll;
-}
-
-#poster {
-    display: block;
-    margin: auto;
-}
-
-.footer {
-    padding: 50px;
-    background-color: #e9ecef;
-    margin-top: 20px;
-}
-
-#footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#footer-container a {
-    color: white;
-}
-
-#connectors a {
-    margin: 5px;
-}
-
-#try {
-    margin-top: 50px;
-}
-
 .grey-color {
     background-color: #4E4E50;
-}
-
-.color-pills > a {
-    color: white;
-}
-
-.color-pills > a:hover {
-    color: white;
 }
 
 .btn-red {
@@ -103,15 +30,50 @@ body a:hover {
     color: white;
 }
 
+.add-padding {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+/* ---------------------------- */
+
+/* ------ Documentation ------- */
+.code-block {
+    padding: 50px;
+    background-color: #4E4E50;
+    border-radius: 10px;
+    color: white;
+}
+
+.color-pills > a {
+    color: white;
+}
+
+.color-pills > a:hover {
+    color: white;
+}
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     color: #fff;
     background-color: #C3073F;
 }
 
+.warning {
+    color: red;
+}
+
+#example-row {
+    height: 350px;
+}
+/* ---------------------------- */
+
+/* --------- Options ---------- */
 #options-table tbody td .fa-lg {
     color: #C3073F;
 }
 
+/* ---------------------------- */
+
+/* --------- Try it out ---------- */
 .nav-item > .tabs {
     color: white;
     border-bottom-color: #C3073F;
@@ -130,6 +92,47 @@ body a:hover {
 .try-padding {
     padding-top: 25px;
 }
+
+#poster {
+    display: block;
+    margin: auto;
+}
+
+#resultText {
+    height: 550px;
+    overflow-y: scroll;
+}
+
+#try {
+    margin-top: 50px;
+}
+
+#wrapper {
+    height: 550px;
+}
+/* ---------------------------- */
+
+/* --------- Footer ---------- */
+.footer {
+    padding: 50px;
+    margin-top: 20px;
+}
+
+#connectors a {
+    margin: 5px;
+}
+
+#footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#footer-container a {
+    color: white;
+}
+/* ---------------------------- */
+
 
 @media only screen and (max-width: 768px) {
     #wrapper {
