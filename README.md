@@ -101,8 +101,6 @@ And there you have it! Pretty simple, huh? I wanted to make it easy for anyone w
 
 * **Kory Hutchison** - *Initial work*
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
