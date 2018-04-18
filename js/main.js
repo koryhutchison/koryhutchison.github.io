@@ -50,11 +50,6 @@ $(function () {
     let year = date.getFullYear();
     $('#footer-year').html(year);
 
-    // Put in a example result from the beginning
-    // Omdb.getByTitle({ title: "Black Panther" }).then(function (response) {
-    //     addToDom(response);
-    // });
-
     // Put the example javascript code in for setting api key
     $('#codeExample').text("<script type=\"text/javascript\" src=\"omdb.js\"></script>\n<script type=\"text/javascript\" src=\"main.js\"></script>").html();
 
@@ -240,7 +235,7 @@ $(function () {
         $('#desc-pagecount').hide();
 
         // Write code to the screen
-        $('#codeExample').text("Omdb.getByTitle(options).then(function (response) {\n    console.log(response);\n}).catch(function(error) {\n    console.log(\"Failed!\", error);\n});").html();
+        $('#codeExample').text("Omdb.getByTitle(options).then(function (response) {\n    console.log(response);\n}).catch(function (error) {\n    console.log(\"Failed!\", error);\n});").html();
     });
     $('#ex-options').click(function (event) {
         event.preventDefault();
@@ -285,7 +280,7 @@ $(function () {
         $('#desc-pages').hide();
         $('#desc-pagecount').hide();
 
-        $('#codeExample').text("Omdb.findBySearch(options).then(function (response) {\n    console.log(response);\n}).catch(function(error) {\n    console.log(\"Failed!\", error);\n});").html();
+        $('#codeExample').text("Omdb.findBySearch(options).then(function (response) {\n    console.log(response);\n}).catch(function (error) {\n    console.log(\"Failed!\", error);\n});").html();
     });
     $('#ex-pages').click(function (event) {
         event.preventDefault();
